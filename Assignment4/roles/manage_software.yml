@@ -1,0 +1,7 @@
+---
+# manage_software.yml
+- name: Manage Software Installation
+  hosts: ubuntu
+  roles:
+    - system_manager
+

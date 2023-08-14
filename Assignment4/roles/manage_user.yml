@@ -1,0 +1,19 @@
+---
+- name: Manage Users on Systems
+  hosts: ubuntu
+  become: yes
+  roles:
+      - system_manager
+  vars:
+    users_to_add:
+      - username: pankaj
+        password: 12345
+      - username: bhawana
+        password: 12345
+    users_to_remove:
+      - Mark
+      - Newton
+    users_to_modify:
+      - username: pankaj
+        password: 54321
+

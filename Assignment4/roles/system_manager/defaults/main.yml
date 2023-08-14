@@ -1,0 +1,30 @@
+---
+# defaults file for system_manager
+software_to_install:
+  - apache2
+  - tree
+  - net-tools
+
+# Default values for user management
+users_to_add: []
+users_to_remove: []
+users_to_modify: []
+
+  # git repo
+git_repositories: []
+
+  # defaults/main.yml
+
+folder_structure:
+  - path: /home/ubuntu/azhar
+    state: directory
+    owner: pankaj
+    group: pankaj
+    mode: "0755"
+  - path: /home/ubuntu/prakash
+    state: directory
+    owner: bhawana
+    group: bhawana
+    mode: "0755"
+
+

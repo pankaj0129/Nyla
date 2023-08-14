@@ -1,0 +1,16 @@
+---
+- name: Manage Git Repositories
+  hosts: ubuntu
+  roles:
+    - system_manager
+  vars:
+    git_user: "pankaj0129"
+    git_email: "bisht03pankaj@gmail.com"
+    git_repositories:
+      - repo: https://github.com/pankaj0129/devops.git
+        dest: /home/ubuntu/mygit
+        version: main
+      - repo: https://github.com/pankaj0129/devops.git
+        dest: /home/ubuntu/mygit2
+        version: main
+

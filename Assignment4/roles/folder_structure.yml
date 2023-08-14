@@ -1,0 +1,5 @@
+- name: Set Up Folder Structures
+  hosts: ubuntu
+  roles:
+    - system_manager
+

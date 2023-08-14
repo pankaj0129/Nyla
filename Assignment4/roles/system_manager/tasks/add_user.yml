@@ -1,0 +1,8 @@
+---
+- name: Add users
+  user:
+    name: "{{ item.username }}"
+    password: "{{ item.password | string | password_hash('sha512') }}"
+    state: present
+  loop: "{{ users_to_add }}"
+

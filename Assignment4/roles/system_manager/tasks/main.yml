@@ -1,0 +1,62 @@
+---
+# tasks file for system_manager
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install required software
+  package:
+    name: "{{ software_to_install }}"
+    state: present
+  become: yes
+
+    #usermanagement
+- include: add_user.yml
+- include: remove_user.yml
+- include: modify_user.yml
+
+
+  # git repo
+- name: git install
+  become: true
+  apt:
+    name: git
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Git install
+  become: true
+  yum:
+    name: git
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Git Configuration
+  template:
+    src: gitconfig.j2
+    dest: ~/.gitconfig
+  vars:
+    git_user: "{{ ansible_user }}"
+    git_email: "{{ ansible_user }}@gmail.com"
+
+- name: Clone or Update Git Repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version }}"
+    accept_hostkey: yes
+  loop: "{{ git_repositories }}"
+
+    # tasks/main.yml
+
+
+- name: Ensure Folder Structures Exist
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop: "{{ folder_structure }}"
+
